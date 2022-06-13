@@ -356,7 +356,7 @@ profiles:
 ```
 此配置列举了scheduler应用到的几乎所有配置 因此以阶段分别介绍阶段中应用的每个插件
 的作用及主要代码介绍 这里主要介绍默认情况下enable的所有插件
-![scheduler.svg](../_resources/scheduler.svg)
+![scheduler.svg](../scheduler.svg)
 
 如何初始化并进入
 - 1.scheduler setup
