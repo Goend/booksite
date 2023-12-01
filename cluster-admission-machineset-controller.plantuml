@@ -1,0 +1,35 @@
+@startuml cluster-admission-machineset-controller
+
+start;
+:MachineSet controller;
+
+repeat
+  :MachineSet controller enqueues a Reconcile call;
+  :List machines specified by selector;
+  repeat
+    :Need changes;
+    if (MachineSet.Spec.Version > bootstrapConfig.spec.version) then (yes)
+        #LightYellow:reconcile new k8s version bootstrapConfig;
+    elseif (MachineSet.Spec.Version = bootstrapConfig.spec.version) then (yes)
+        #LightYellow:nothing to do;
+    elseif (MachineSet.Spec.Version < bootstrapConfig.spec.version) then (yes)
+        #LightYellow:reconcile old k8s version bootstrapConfig;
+    endif
+  repeat
+    if (Machine has no controller) then (yes)
+      #LightBlue:Adopt machine;
+    endif
+  repeat while (More machines) is (yes)
+  :Propagate in-place changes to existing Machines;
+  if (Not enough replicas) then (yes)
+    #LightBlue:Boot new machine;
+  elseif (Too many replicas) then (yes)
+    #LightBlue:Delete machines;
+  endif
+  if (Not all machines are ready) then (yes)
+    #Pink:Return Requeue;
+  endif
+repeat while (Create returned Requeue) is (yes)
+stop;
+
+@enduml
