@@ -7,12 +7,9 @@ repeat
   :MachineSet controller enqueues a Reconcile call;
   :List machines specified by selector;
   repeat
-    :Need changes;
     if (MachineSet.Spec.Version > bootstrapConfig.spec.version) then (yes)
         #LightYellow:reconcile new k8s version bootstrapConfig;
-    elseif (MachineSet.Spec.Version = bootstrapConfig.spec.version) then (yes)
-        #LightYellow:nothing to do;
-    elseif (MachineSet.Spec.Version < bootstrapConfig.spec.version) then (yes)
+    else (MachineSet.Spec.Version < bootstrapConfig.spec.version) then (yes)
         #LightYellow:reconcile old k8s version bootstrapConfig;
     endif
   repeat
