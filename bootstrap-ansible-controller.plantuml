@@ -1,0 +1,36 @@
+@startuml
+
+start
+
+:New/Updated resource;
+
+if (Deleted?) then (yes)
+    stop
+else (no)
+    if (Has machine owner?) then (yes)
+        if (Has status.failureReason/failureMessage?) then (yes)
+            stop
+        else (no)
+            if (Cluster exists?) then (no)
+                stop
+            else (yes)
+            endif
+            if (Cluster pause?)) then (yes)
+                stop
+            else (no)
+                : ensureBootstrapSecretOwnersRef;
+                :Point status.dataSecretName;
+                if (Bootstrap task job finished?) then (no)
+                    :Generate bootstrap task job & get job log and job status;
+                else (yes)
+                endif
+                :set status.ready to true;
+            endif
+        endif
+    else (no)
+    endif
+endif
+:Patch resource to persist changes;
+stop
+
+@enduml
