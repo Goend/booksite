@@ -34,6 +34,7 @@
 
 10. **兼容性风险检查**  
     - 阅读版本兼容性差异并确认不受影响（补丁升级例外）需要
+
 | Source Version | Target Version | Compatibility Differences | Recommended Actions |
 |----------------|----------------|---------------------------|---------------------|
 | v1.23/v1.25 | v1.27 | Docker container runtime is no longer recommended (use Containerd instead) | Already included in pre-upgrade checks :cite[1] |
