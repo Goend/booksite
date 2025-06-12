@@ -37,9 +37,9 @@
 
 | Source Version | Target Version | Compatibility Differences | Recommended Actions |
 |----------------|----------------|---------------------------|---------------------|
-| v1.23/v1.25 | v1.27 | Docker container runtime is no longer recommended (use Containerd instead) | Already included in pre-upgrade checks :cite[1] |
-| v1.23 | v1.25 | PodSecurityPolicy removed (replaced by Pod Security Admission) | - Migrate PSP capabilities to PSA <br>- Or delete PSPs before upgrade :cite[1] |
-| v1.21/v1.19 | v1.23 | Nginx Ingress Controller v1.0.0+ requires explicit `kubernetes.io/ingress.class: nginx` annotation | Check Ingress configurations before upgrade :cite[1] |
+| v1.23/v1.25 | v1.27 | Docker container runtime is no longer recommended (use Containerd instead) | Already included in pre-upgrade checks  |
+| v1.23 | v1.25 | PodSecurityPolicy removed (replaced by Pod Security Admission) | - Migrate PSP capabilities to PSA <br>- Or delete PSPs before upgrade  |
+| v1.21/v1.19 | v1.23 | Nginx Ingress Controller v1.0.0+ requires explicit `kubernetes.io/ingress.class: nginx` annotation | Check Ingress configurations before upgrade  |
 
 
 11. **节点上 CCE Agent 版本检查**  
