@@ -4,13 +4,13 @@
    - 检查节点是否可用  node ready 对比华为 https://support.huaweicloud.com/cce_faq/cce_faq_00120.html 实际节点不可用对应Kubernetes 节点没有发送的心跳
    - 操作系统是否支持升级(ecf ecnf操作系统为我们定义 这个应该不需要检查)  skip
    - 是否含有非预期的节点池标签(没有对节点标签进行强管理) skip 
-   - K8s 节点名称是否与云服务器一致 
+   - K8s 节点名称是否与云服务器一致  待定
 
 2. **升级管控检查**  
-   - 检查集群是否处于升级管控状态 华为检查逻辑是1.生产集群被限制升级 需要手动打开 2.进行其他运维任务 不允许升级
+   - 检查集群是否处于升级管控状态 华为检查逻辑是1.生产集群被限制升级 需要手动打开 2.进行其他运维任务 不允许升级 待定
 
 3. **插件检查**  
-   - 插件状态是否正常 华为检查主要插件功能是否正常 主要包括 coredns,nginx ingress等
+   - 插件状态是否正常 华为检查主要插件功能是否正常 主要包括 coredns,nginx ingress等 待定
    - 是否支持目标版本 由于我们的插件版本本身和eos版本一起升级 检查可能反而引入错误 skip
 
 4. **Helm 模板检查**  
@@ -195,58 +195,58 @@ done
     - 监控插件升级至 3.9.0 后是否开启 Grafana 开关  云产品 无此场景 skip
 
 59. **Containerd Pod 重启风险检查**  
-    - 升级 containerd 时是否可能重启业务容器 :contentReference[oaicite:58]{index=58}
+    - 升级 containerd 时是否可能重启业务容器 没有明确说明的检查方法  待定
 
 60. **CCE AI 插件参数检查**  
-    - GPU 插件配置是否被侵入式修改 :contentReference[oaicite:59]{index=59}
+    - GPU 插件配置是否被侵入式修改 云产品由于在我们的场景中不属于eos升级部分 无此场景skip
 
 61. **GPU/NPU Pod 重建风险检查**  
-    - kubelet 重启时 GPU/NPU 容器是否可能重建 :contentReference[oaicite:60]{index=60}
+    - kubelet 重启时 GPU/NPU 容器是否可能重建 没有明确说明的检查方法 待定
 
 62. **ELB 访问控制配置检查**  
-    - 若有访问控制，检查其配置是否正确 :contentReference[oaicite:61]{index=61}
+    - 检查当前集群Service是否通过annotation配置了ELB监听器的访问控制 若有配置访问控制则检查相关配置项是否正确 无此场景skip
 
 63. **控制节点规格检查**  
-    - 升级前后控制节点规格是否一致 :contentReference[oaicite:62]{index=62}
+    - 升级前后控制节点规格是否一致 在我们的场景中 规格会发生变化么？ 待定
 
 64. **控制节点子网配额检查**  
-    - 子网剩余 IP 是否支持滚动升级 :contentReference[oaicite:63]{index=63}
+    - 子网剩余 IP 是否支持滚动升级 无此场景 skip
 
 65. **节点运行时检查**  
-    - 升级至 v1.27+ 后不建议继续使用 Docker :contentReference[oaicite:64]{index=64}
+    - 升级至 v1.27+ 后不建议继续使用 Docker 无此场景 skip
 
 66. **节点池运行时检查**  
-    - 同上，对节点池运行时的检测 :contentReference[oaicite:65]{index=65}
+    - 同上，对节点池运行时的检测  无此场景 skip
 
 67. **节点镜像数量检查**  
-    - 镜像数量 >1000 时可能导致启动过慢 :contentReference[oaicite:66]{index=66}
+    - 镜像数量 >1000 时可能导致启动过慢 待定
 
 68. **OpenKruise 插件兼容性检查**  
-    - 检查升级时 OpenKruise 插件兼容情况 :contentReference[oaicite:67]{index=67}
+    - 检查升级时 OpenKruise 插件兼容情况  无此场景 skip
 
 69. **Secret 落盘加密兼容性检查**  
-    - 目标版本是否支持密文落盘特性 :contentReference[oaicite:68]{index=68}
+    - 目标版本是否支持密文落盘特性  无此场景 skip
 
 70. **Ubuntu 内核与 GPU 驱动兼容性提醒**  
-    - 若 Ubuntu 内核为 `5.15.0-113-generic`，需 GPU 驱动 ≥ 535.161.08 :contentReference[oaicite:69]{index=69}
+    - 若 Ubuntu 内核为 `5.15.0-113-generic`，需 GPU 驱动 ≥ 535.161.08  云产品问题 无此场景 skip
 
 71. **排水任务检查**  
-    - 检查是否存在未完成的 drain 任务 :contentReference[oaicite:70]{index=70}
+    - 检查是否存在未完成的 drain 任务 无法检查 skip
 
 72. **镜像层数量检查**  
-    - 镜像层 >5000 层时可能导致输出延迟 :contentReference[oaicite:71]{index=71}
+    - 镜像层 >5000 层时可能导致输出延迟 
 
 73. **是否满足滚动升级条件**  
-    - 检查集群滚动升级条件是否满足 :contentReference[oaicite:72]{index=72}
+    - 检查集群滚动升级条件是否满足 适用于虚拟机场景 无此场景 skip
 
 74. **证书文件数量检查**  
-    - 证书文件 >1000 时可能导致升级缓慢 Pod 被驱逐 :contentReference[oaicite:73]{index=73}
+    - 证书文件 >1000 时可能导致升级缓慢 Pod 被驱逐 无此场景 skip
 
 75. **NetworkPolicy 开关检查**  
-    - 检查 NetworkPolicy 配置，如被修改升级时将被重置 :contentReference[oaicite:74]{index=74}
+    - 检查 NetworkPolicy 配置，如被修改升级时将被重置 目前对于networkpolicy没有明确支持(kube ovn) 无此场景 skip
 
 76. **集群与节点池配置管理检查**  
-    - 检查 `nic-max-above-warm-target` 是否超过最大允许值 :contentReference[oaicite:75]{index=75}
+    - 检查 `nic-max-above-warm-target` 是否超过最大允许值 无此场景 skip
 
 77. **控制节点时区检查**  
-    - 检查控制节点时区是否与集群时区一致，升级后将统一时区 :contentReference[oaicite:76]{index=76}
+    - 检查控制节点时区是否与集群时区一致，升级后将统一时区 时间同步检查在escl中应该做了 需要确认 待定
