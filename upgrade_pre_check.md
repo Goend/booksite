@@ -2,7 +2,7 @@
 
 1. **节点限制检查**  
    - 检查节点是否可用  node ready 对比华为 https://support.huaweicloud.com/cce_faq/cce_faq_00120.html 实际节点不可用对应Kubernetes 节点没有发送的心跳
-   - 操作系统是否支持升级(ecf ecnf操作系统为我们定义 这个应该不需要检查)  skip
+   - 操作系统是否支持升级(ecf ecnf操作系统为我们定义 这个应该不需要检查)  skip  	U+2718
    - 是否含有非预期的节点池标签(没有对节点标签进行强管理) skip 
    - K8s 节点名称是否与云服务器一致  待定
 
