@@ -1,3 +1,17 @@
+重点:
+# 升级前重点检查项与业务相关风险表
+
+| 检查项目       | 资源类型     | 资源名称                                                       | 集群版本要求     | 处理方法说明                                                                                   |
+|----------------|--------------|------------------------------------------------------------------|------------------|------------------------------------------------------------------------------------------------|
+| 节点配置检查   | 文件         | /etc/kubernetes/kubelet.env                                     | 所有版本         | 检查文件是否被修改，是否符合当前集群期望配置                                                  |
+| 节点配置检查   | 文件         | /etc/kubernetes/kubelet_config.yaml                             | 所有版本         | 检查 kubelet 配置参数变更，是否与业务运行兼容                                                  |
+| 节点配置检查   | 文件         | /etc/containerd/config.toml                                     | 所有版本         | 检查容器运行时配置是否变更，确保 runtime 行为不受影响                                          |
+| 资源版本过期检查 | 集群资源     | 所有 Deployment / StatefulSet / CRD 等                          | 下一版本将升级     | 检查当前部署资源定义中使用的 API Version 是否在下个版本中废弃，仅输出警告                       |
+| 资源版本过期检查 | Helm Release | 所有已安装 Helm Chart 及其 manifests                            | 下一版本将升级     | 检查模板资源中的 Kubernetes API Version 使用情况，提示是否兼容下一版本                          |
+| 兼容性检查     | 集群资源注解 | service.alpha.kubernetes.io/tolerate-unready-endpoints          | >= v1.25         | 替换为 `.spec.publishNotReadyAddresses = true`，否则原注解将失效                                |
+| 兼容性检查     | 集群资源注解 | service.kubernetes.io/topology-aware-hints    
+
+
 # 升级前检查项（共 75 条）
 
 1. **节点限制检查**  
