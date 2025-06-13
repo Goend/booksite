@@ -12,7 +12,7 @@
 |      | 集群资源注解 | service.kubernetes.io/topology-aware-hints    
 
 
-#### 升级前检查项（共 75 条）
+#### 华为CCE升级前检查项（共 75 条）
 
 1. **节点限制检查**  
    - 检查节点是否可用  node ready 对比华为 https://support.huaweicloud.com/cce_faq/cce_faq_00120.html 实际节点不可用对应Kubernetes 节点没有发送的心跳
